@@ -1,5 +1,4 @@
 <script>
-import ShoppingCart from "@/components/ShoppingCart.vue";
 
 export default {
   data() {
@@ -22,9 +21,6 @@ export default {
     sortOrder: function () {
       this.fetchAndFilterLessons();
     },
-  },
-  components: {
-    ShoppingCart,
   },
   props: ["baseURL", "lessons", "images", "cart", "changeView"],
 
@@ -108,7 +104,7 @@ export default {
               v-model="searchQuery"
             />
           </div>
-          <ShoppingCart :cart="cart" :changeView="changeView" />
+          <slot name="shoppingCart"></slot>
           <div class="d-flex d-md-none">
             <!-- Sort By Dropdown -->
             <div class="dropdown mx-5">
