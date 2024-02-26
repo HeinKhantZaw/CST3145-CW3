@@ -32,22 +32,6 @@ export default {
       );
       this.lessons = await response.json();
     },
-    addToCart: function (lesson) {
-      if (lesson.Spaces > 0) {
-        lesson.Spaces--;
-        const lessonIndex = this.cart.findIndex(
-          (item) => item.lesson === lesson
-        );
-        if (lessonIndex !== -1) {
-          this.cart[lessonIndex].amount++;
-        } else {
-          this.cart.push({
-            lesson: lesson,
-            amount: 1,
-          });
-        }
-      }
-    },
   },
 };
 </script>
@@ -179,7 +163,7 @@ export default {
               <button
                 class="btn btn-primary"
                 :class="lesson.Spaces <= 0 && 'disabled btn-secondary'"
-                @click="addToCart(lesson)"
+                @click="$emit('add-item-to-cart', lesson)"
                 :disabled="lesson.Spaces <= 0"
                 :style="{
                   cursor: lesson.Spaces <= 0 ? 'not-allowed' : 'pointer',

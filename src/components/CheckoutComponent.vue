@@ -47,31 +47,6 @@ export default {
         }
       }
     },
-    addToCart: function (lesson) {
-      if (lesson.Spaces > 0) {
-        lesson.Spaces--;
-        const lessonIndex = this.cart.findIndex(
-          (item) => item.lesson === lesson
-        );
-        if (lessonIndex !== -1) {
-          this.cart[lessonIndex].amount++;
-        } else {
-          this.cart.push({
-            lesson: lesson,
-            amount: 1,
-          });
-        }
-      }
-    },
-    removeFromCart: function (item) {
-      item.lesson.Spaces += item.amount;
-      const lessonIndex = this.cart.findIndex(
-        (cartItem) => cartItem.lesson === item.lesson
-      );
-      if (lessonIndex !== -1) {
-        this.cart.splice(lessonIndex, 1);
-      }
-    },
     backToHome: function (modalClose) {
       // reset everything when user goes back home
       this.isNameValid = true;
@@ -225,7 +200,7 @@ export default {
                             />
                             <button
                               class="btn btn-link px-2"
-                              @click="addToCart(item.lesson)"
+                              @click="$emit('add-item-to-cart', item.lesson)"
                             >
                               <i class="fas fa-plus"></i>
                             </button>
@@ -236,7 +211,7 @@ export default {
                             </h6>
                           </div>
                           <div class="col-1 col-lg-1 text-end">
-                            <a @click="removeFromCart(item)" class="text-muted"
+                            <a @click="$emit('@remove-item-from-cart', item)" class="text-muted"
                               ><i
                                 class="fas fa-trash"
                                 style="color: #e20100"

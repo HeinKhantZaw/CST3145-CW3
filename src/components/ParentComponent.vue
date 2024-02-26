@@ -38,6 +38,31 @@ export default {
       } else {
         this.currentPage = "Home";
       }
+    },
+    addToCart: function(lesson) {
+      if (lesson.Spaces > 0) {
+        lesson.Spaces--;
+        const lessonIndex = this.cart.findIndex(
+          (item) => item.lesson === lesson
+        );
+        if (lessonIndex !== -1) {
+          this.cart[lessonIndex].amount++;
+        } else {
+          this.cart.push({
+            lesson: lesson,
+            amount: 1
+          });
+        }
+      }
+    },
+    removeFromCart: function(item) {
+      item.lesson.Spaces += item.amount;
+      const lessonIndex = this.cart.findIndex(
+        (cartItem) => cartItem.lesson === item.lesson
+      );
+      if (lessonIndex !== -1) {
+        this.cart.splice(lessonIndex, 1);
+      }
     }
   }
 };
@@ -51,7 +76,10 @@ export default {
       :lessons="lessons"
       :images="images"
       :baseURL="baseURL"
-      :changeView="changeView">
+      :changeView="changeView"
+      @add-item-to-cart="addToCart"
+      @remove-item-from-cart="removeFromCart"
+    >
       <template v-slot:shoppingCart>
         <ShoppingCart :cart="cart" :changeView="changeView" />
       </template>
