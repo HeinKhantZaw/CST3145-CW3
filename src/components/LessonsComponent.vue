@@ -1,5 +1,4 @@
 <script>
-
 export default {
   data() {
     return {
@@ -25,7 +24,6 @@ export default {
   props: ["baseURL", "lessons", "images", "cart", "changeView"],
 
   methods: {
-
     fetchAndFilterLessons: async function () {
       const response = await fetch(
         `${this.apiURL}search?query=${this.searchQuery}&sortBy=${this.sortBy}&sortOrder=${this.sortOrder}`

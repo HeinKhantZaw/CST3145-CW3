@@ -12,7 +12,7 @@ import ParentComponent from "./components/ParentComponent.vue";
 export default {
   name: "App",
   components: {
-    ParentComponent
+    ParentComponent,
   },
   created: function () {
     if ("serviceWorker" in navigator) {
@@ -29,12 +29,5 @@ export default {
         });
     }
   },
-  methods: {
-    storeInCache: async function(request, response) {
-      const cache = await caches.open("lesson-cache");
-      await cache.put(request, new Response(JSON.stringify(response)));
-      console.log("Stored in cache:", response);
-    },
-  }
-}
+};
 </script>

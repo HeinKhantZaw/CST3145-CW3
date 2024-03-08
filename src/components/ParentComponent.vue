@@ -10,36 +10,36 @@ export default {
       lessons: [],
       images: [],
       currentPage: "Home",
-      baseURL: "https://vue-env.eba-knuwpbba.eu-west-2.elasticbeanstalk.com/"
+      baseURL: "https://vue-env.eba-knuwpbba.eu-west-2.elasticbeanstalk.com/",
     };
   },
   components: {
     ShoppingCart,
     Home,
-    Checkout
+    Checkou,
   },
   created() {
     this.fetchLessons();
   },
   methods: {
-    fetchLessons: async function() {
+    fetchLessons: async function () {
       const response = await fetch(this.baseURL + "api/lessons");
       this.lessons = await response.json();
       this.lessons.map(async (lesson) => {
         this.images.push({
           Subject: lesson.Subject,
-          URL: this.baseURL + "images/" + lesson.Subject.toLowerCase() + ".jpg"
+          URL: this.baseURL + "images/" + lesson.Subject.toLowerCase() + ".jpg",
         });
       });
     },
-    changeView: function() {
+    changeView: function () {
       if (this.cart.length > 0 && this.currentPage === "Home") {
         this.currentPage = "Checkout";
       } else {
         this.currentPage = "Home";
       }
     },
-    addToCart: function(lesson) {
+    addToCart: function (lesson) {
       if (lesson.Spaces > 0) {
         lesson.Spaces--;
         const lessonIndex = this.cart.findIndex(
@@ -50,12 +50,12 @@ export default {
         } else {
           this.cart.push({
             lesson: lesson,
-            amount: 1
+            amount: 1,
           });
         }
       }
     },
-    removeFromCart: function(item) {
+    removeFromCart: function (item) {
       item.lesson.Spaces += item.amount;
       const lessonIndex = this.cart.findIndex(
         (cartItem) => cartItem.lesson === item.lesson
@@ -63,8 +63,8 @@ export default {
       if (lessonIndex !== -1) {
         this.cart.splice(lessonIndex, 1);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -87,6 +87,4 @@ export default {
   </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
