@@ -187,7 +187,7 @@ export default {
                               class="btn btn-link px-2"
                               @click="reduceFromCart(item.lesson)"
                             >
-                              <i class="fas fa-minus"></i>
+                              <font-awesome-icon icon="fas fa-minus"></font-awesome-icon>
                             </button>
                             <input
                               id="form1"
@@ -202,7 +202,7 @@ export default {
                               class="btn btn-link px-2"
                               @click="$emit('add-item-to-cart', item.lesson)"
                             >
-                              <i class="fas fa-plus"></i>
+                              <font-awesome-icon icon="fas fa-plus"></font-awesome-icon>
                             </button>
                           </div>
                           <div class="col-3 col-lg-3 offset-lg-1">
@@ -212,11 +212,10 @@ export default {
                           </div>
                           <div class="col-1 col-lg-1 text-end">
                             <a @click="$emit('@remove-item-from-cart', item)" class="text-muted"
-                              ><i
-                                class="fas fa-trash"
-                                style="color: #e20100"
-                              ></i
-                            ></a>
+                            >
+                              <font-awesome-icon icon="fas fa-trash"
+                                                 style="color: #e20100" />
+                            </a>
                           </div>
                         </div>
                         <hr class="my-4" />
