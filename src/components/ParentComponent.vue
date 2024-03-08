@@ -16,7 +16,7 @@ export default {
   components: {
     ShoppingCart,
     Home,
-    Checkou,
+    Checkout,
   },
   created() {
     this.fetchLessons();
