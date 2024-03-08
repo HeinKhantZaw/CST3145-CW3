@@ -1,14 +1,7 @@
 let cacheName = "AfterSchoolClass";
-let cacheFiles = ["/index.html"];
 
-self.addEventListener("install", (e) => {
+self.addEventListener("install", () => {
   console.log("[ServiceWorker] Installed");
-  e.waitUntil(
-    caches.open(cacheName).then((cache) => {
-      console.log("[ServiceWorker] Caching files...");
-      return cache.addAll(cacheFiles);
-    })
-  );
 });
 
 self.addEventListener("fetch", function(e) {

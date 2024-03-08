@@ -202,7 +202,9 @@ export default {
                               class="btn btn-link px-2"
                               @click="$emit('add-item-to-cart', item.lesson)"
                             >
-                              <font-awesome-icon icon="fas fa-plus"></font-awesome-icon>
+                              <font-awesome-icon
+                                icon="fas fa-plus"
+                              ></font-awesome-icon>
                             </button>
                           </div>
                           <div class="col-3 col-lg-3 offset-lg-1">
@@ -211,11 +213,13 @@ export default {
                             </h6>
                           </div>
                           <div class="col-1 col-lg-1 text-end">
-                            <a @click="$emit('@remove-item-from-cart', item)" class="text-muted"
+                            <button @click="$emit('remove-item-from-cart', item)" class="btn btn-link px-2"
                             >
-                              <font-awesome-icon icon="fas fa-trash"
-                                                 style="color: #e20100" />
-                            </a>
+                              <font-awesome-icon
+                                icon="fas fa-trash"
+                                style="color: #e20100"
+                              />
+                            </button>
                           </div>
                         </div>
                         <hr class="my-4" />
