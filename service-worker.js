@@ -5,6 +5,9 @@ self.addEventListener("install", () => {
 });
 
 self.addEventListener("fetch", function (e) {
+  if (e.request.url.startsWith("chrome-extension://")) {
+    return;
+  }
   if (e.request.url.startsWith("http") || e.request.url.startsWith("https")) {
     e.respondWith(
       caches.match(e.request).then(function (cachedFile) {
