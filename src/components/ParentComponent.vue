@@ -64,6 +64,16 @@ export default {
         this.cart.splice(lessonIndex, 1);
       }
     },
+    reduceFromCart: function (lesson) {
+      lesson.Spaces++;
+      const lessonIndex = this.cart.findIndex((item) => item.lesson === lesson);
+      if (lessonIndex !== -1) {
+        this.cart[lessonIndex].amount--;
+        if (this.cart[lessonIndex].amount <= 0) {
+          this.cart.splice(lessonIndex, 1);
+        }
+      }
+    },
   },
 };
 </script>
@@ -79,6 +89,7 @@ export default {
       :changeView="changeView"
       @add-item-to-cart="addToCart"
       @remove-item-from-cart="removeFromCart"
+      @reduce-item-from-cart="reduceFromCart"
     >
       <template v-slot:shoppingCart>
         <ShoppingCart :cart="cart" :changeView="changeView" />

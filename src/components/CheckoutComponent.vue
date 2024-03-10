@@ -37,16 +37,6 @@ export default {
       let phoneRegex = /^[0-9]+$/; // only numbers
       this.isNumberValid = phoneRegex.test(this.phoneNumber);
     },
-    reduceFromCart: function (lesson) {
-      lesson.Spaces++;
-      const lessonIndex = this.cart.findIndex((item) => item.lesson === lesson);
-      if (lessonIndex !== -1) {
-        this.cart[lessonIndex].amount--;
-        if (this.cart[lessonIndex].amount <= 0) {
-          this.cart.splice(lessonIndex, 1);
-        }
-      }
-    },
     backToHome: function (modalClose) {
       // reset everything when user goes back home
       this.isNameValid = true;
@@ -185,9 +175,13 @@ export default {
                           <div class="col-6 col-lg-4 d-flex">
                             <button
                               class="btn btn-link px-2"
-                              @click="reduceFromCart(item.lesson)"
+                              @click="
+                                $emit('reduce-item-from-cart', item.lesson)
+                              "
                             >
-                              <font-awesome-icon icon="fas fa-minus"></font-awesome-icon>
+                              <font-awesome-icon
+                                icon="fas fa-minus"
+                              ></font-awesome-icon>
                             </button>
                             <input
                               id="form1"
@@ -213,7 +207,9 @@ export default {
                             </h6>
                           </div>
                           <div class="col-1 col-lg-1 text-end">
-                            <button @click="$emit('remove-item-from-cart', item)" class="btn btn-link px-2"
+                            <button
+                              @click="$emit('remove-item-from-cart', item)"
+                              class="btn btn-link px-2"
                             >
                               <font-awesome-icon
                                 icon="fas fa-trash"
